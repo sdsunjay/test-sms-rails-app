@@ -1,12 +1,25 @@
 <div id="verify-pin">
 <h3>Enter your PIN</h3>
-<%= form_tag users_verify_path, remote: true do |f| %>
-  <%= hidden_field_tag 'hidden_phone_number', '' %>
-  <div class="form-group">
-	<%= text_field_tag :pin, nil, :required => true %>
-  </div>
-  <%= submit_tag "Verify PIN", class: "btn btn-primary" %>
-  <% end %>
+
+<%= form_for(current_user, as: 'user', url: users_verify_path(current_user), html: { method: :post }) do |f| %>
+          <% if @show_errors && current_user.errors.any? %>
+              <div id="error_explanation">
+                <% current_user.errors.full_messages.each do |msg| %>
+                    <%= msg %><br>
+                <% end %>
+             </div>
+         <% end %>
+         <div class="form-group">
+             <%= f.label :Pin %>
+             <div class="controls">
+                 <%= f.text_field :pin, autofocus: true, value: '',  autocomplete: :off, required: true, class: 'form-control input-lg', placeholder: 'Pin' %>
+                 <p class="help-block">Please confirm your pin. </p>
+             </div>
+         </div>
+         <div class="actions">
+             <%= f.submit 'Verify PIN', class: 'btn btn-primary blue-color' %>
+         </div>
+     <% end %>
 </div>
 
 <div id="status-box" class="alert alert-success">

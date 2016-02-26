@@ -8,8 +8,20 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
 
 
-  def verify_phone_number(entered_pin)
-    update(phone_number_verified: true) if self.pin == entered_pin
+  def compare_pin_to(user_entered_pin)
+    puts 'USER ENTERED PIN IS: '
+    puts user_entered_pin  
+    if user_entered_pin == self.pin
+	return true
+      else
+	return false
+      end
+  end
+
+  def set_phone_number_to_verified
+   update(phone_number_verified: true)
+   # self.phone_number_verified = true
+   # save
   end
   def generate_pin
     self.pin = rand(0000..9999).to_s.rjust(4, "0")
