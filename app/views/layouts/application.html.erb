@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TestSmsRailsApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%= render 'layouts/header' %>
+    <div class="container-fluid">
+            <% if flash[:notice] %>
+            <div class="alert-content">
+                <div class="alert alert-success"><%= flash[:notice] %></div>
+            </div>
+            <% end %>
+            <% if flash[:alert] %>
+            <div class="alert-content">
+                <div class="alert alert-danger"><%= flash[:alert] %></div>
+            </div>
+            <% end %>
+	   <%= yield %>
+        </div>
+</body>
+</html>

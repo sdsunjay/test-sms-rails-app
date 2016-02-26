@@ -1,0 +1,39 @@
+<!-- 'access_level' must be set to 1 or 2 to view this page -->
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="page-sub-title textcenter">
+<h2 class="page-header">Manage Users <%= link_to 'Create New',  new_user_registration_path, class:'btn btn-success pull-right'%></h2>
+          <div class="line"></div>
+        </div><!-- end .page-sub-title -->
+      </div><!-- end .col-md-12 col-sm-12 col-xs-12 -->
+
+            <table class="table table-striped">
+                <tr>
+                  <th>User's Full Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Verified</th>
+                  <th>Create Date </th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+              </tr>
+              <% @users.each do |user| %>
+                <tr>
+           	        <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.phone_number %></td>
+                    <td><%= user.phone_number_verified %></td>
+		                <td><%= user.created_at.to_time.strftime('%B %e at %l:%M %p' ) %></td>
+                    <td><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-primary' %></td>
+                    <td><%= link_to 'Delete', user_path(user), class: 'btn btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></td>
+                </tr>
+            <% end %>
+            </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
